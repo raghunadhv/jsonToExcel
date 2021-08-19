@@ -1,0 +1,38 @@
+{
+  "customer": {
+    "name" : "raghu",
+    "cars":["Ford", "BMW", "Fiat"],
+    "shipTo" : { "name" : "Jane Smith",
+      "address" : "123 Maple Street",
+      "city" : "Pretendville",
+      "state" : "NY",
+      "zip"   : "12345",
+      "addresses": [{"address": {
+        "city": "bangalore",
+        "state": "karnataka",
+        "country": "india"
+      }},{"address": {
+        "city": "bangalore22",
+        "state": "karnataka",
+        "country": "india"
+      }}
+      ]
+    },
+
+
+    "accounts": [
+      {
+        "account": {
+          "acctNo": 2232
+        }
+      },
+      {"account": {
+          "acctNo": 22322
+        }
+      }
+      ]
+  ,
+    "type" : "regular"
+
+  }
+}
