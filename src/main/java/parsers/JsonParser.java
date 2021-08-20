@@ -21,30 +21,26 @@ public class JsonParser {
             String fieldValues = "";
             EntityData newEntity = new EntityData();
             while (fieldIterator.hasNext()) {
-                Map.Entry<String, JsonNode> fields = fieldIterator.next();
-                if (!fields.getValue().isValueNode()) {
-                    //   System.out.println(currentNode+ " node " + fields.getKey());
-                    String node = fields.getKey();
-                    System.out.println("???"+fields.getValue());
-                    //entityDataList.add(newEntity);
+                Map.Entry<String, JsonNode> fieldObj = fieldIterator.next();
+                if (!fieldObj.getValue().isValueNode()) {
+                     String node = fieldObj.getKey();
+                    System.out.println("???"+fieldObj.getValue());
                     nodesLst.add(node);
                 } else {
                      FieldData fieldData = new FieldData();
-                    fieldData.setFieldName(fields.getValue().asText());
-                    fieldData.setFieldHeaderName(fields.getKey());
+                    fieldData.setFieldName(fieldObj.getValue().asText());
+                    fieldData.setFieldHeaderName(fieldObj.getKey());
                     newEntity.getFieldsList().add(fieldData);
-                    fieldHeaders += fields.getKey() + ",";
-                    fieldValues += fields.getValue() + ",";
+                    fieldHeaders += fieldObj.getKey() + ",";
+                    fieldValues += fieldObj.getValue() + ",";
 
-                    // System.out.println(currentNode +" field " + fields.getKey() + fields.getValue());
-                }
+                 }
             }
             if (currentNode != null) {
                 newEntity.setEntityName(findCurrentNodeName(currentNode));
                 String parentNodeName = findParentNodeName(currentNode);
                 Optional<EntityData> entityDataOptional = findEntity(entityDataList, parentNodeName);
                 int depth=currentNode.split("->").length-1;
-                newEntity.setDepth(depth);
                 if (entityDataOptional.isPresent()) {
                     boolean isNodePresent = checkNodeListHasEntity(entityDataOptional.get(), newEntity.getEntityName());
                     if (!entityDataOptional.get().getEntityName().equals(newEntity.getEntityName()) && (!isNodePresent)) {
